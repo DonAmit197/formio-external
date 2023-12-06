@@ -6,5 +6,8 @@
 # Node artifact files
 node_modules/
 
+# remove
 .prettierrc
+#remove 
+.env
 

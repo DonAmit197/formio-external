@@ -1,5 +1,6 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 const sourcemaps = require('gulp-sourcemaps');
+const Dotenv = require('dotenv-webpack');
 const webpack = require("webpack-stream");
 const minify = require("gulp-minify");
 const webserver = require("gulp-webserver");
@@ -14,6 +15,11 @@ function jsTask() {
                     {
                         watch: true,
                         mode: "development",
+                        plugins: [
+                            new Dotenv(),
+
+
+                        ],
                         module: {
                             rules: [
                                 {
@@ -36,6 +42,19 @@ function jsTask() {
                                     ],
                                 }
                             ],
+                        },
+                        /**
+                         * ! Resolve is important
+                         * As Webpack doesn't supports node's core module
+                         */
+                        resolve: {
+                            fallback: {
+                                "path": require.resolve("path-browserify"),
+                                "os": require.resolve("os-browserify/browser"),
+                                "crypto": require.resolve("crypto-browserify"),
+                                "buffer": require.resolve("buffer/"),
+                                "stream": require.resolve("stream-browserify")
+                            }
                         }
 
                     }

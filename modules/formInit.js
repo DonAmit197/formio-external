@@ -4,9 +4,8 @@ export const FormInit = () => {
 
     const formioForm = document.querySelector("#formio");
     const formId = formioForm.getAttribute('data-form');
-
     var myHeaders = new Headers();
-    myHeaders.append("x-token", "K2Nuxntzw7f323tpobjTOf42QmKFph");
+    myHeaders.append("x-token", process.env.FORMIO_API_KEY);
 
     var formdata = new FormData();
 
@@ -16,7 +15,7 @@ export const FormInit = () => {
         redirect: 'follow'
     };
 
-    fetch(`https://dev-businessconnect.form.io/form/${formId}`, requestOptions)
+    fetch(`${process.env.FORMIO_API_URL}/form/${formId}`, requestOptions)
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok')
