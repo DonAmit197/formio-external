@@ -1,67 +1,34 @@
-const { src, dest, watch, series, parallel } = require('gulp');
+const { src, dest, series, parallel, watch } = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+//const autoprefixer = require('gulp-autoprefixer');
 const Dotenv = require('dotenv-webpack');
+const webPackConfig = require('./webpack.config');
 const webpack = require("webpack-stream");
 const minify = require("gulp-minify");
+//const watch = require('gulp-watch');
 const webserver = require("gulp-webserver");
+const cleanCSS = require('gulp-clean-css');
 
 const jsFiles = './index.js';
 
 function jsTask() {
-    return (
-        src(jsFiles)
-            .pipe(
-                webpack(
-                    {
-                        watch: true,
-                        mode: "development",
-                        plugins: [
-                            new Dotenv(),
+    return src(jsFiles)
+        .pipe(webpack(webPackConfig))
+        .pipe(dest('dist'));
+}
 
+function sassTask() {
 
-                        ],
-                        module: {
-                            rules: [
-                                {
-                                    test: /\.(js|jsx)$/i,
-                                    loader: "babel-loader",
-                                },
-                                {
-                                    test: /\.s[ac]ss$/i,
-                                    use: [
-                                        "style-loader",
-                                        "css-loader",
-                                        {
-                                            loader: "sass-loader",
-                                            options: {
-                                                // Prefer `dart-sass`
-                                                implementation: require("sass"),
-                                                sourceMap: true,
-                                            },
-                                        },
-                                    ],
-                                }
-                            ],
-                        },
-                        /**
-                         * ! Resolve is important
-                         * As Webpack doesn't supports node's core module
-                         */
-                        resolve: {
-                            fallback: {
-                                "path": require.resolve("path-browserify"),
-                                "os": require.resolve("os-browserify/browser"),
-                                "crypto": require.resolve("crypto-browserify"),
-                                "buffer": require.resolve("buffer/"),
-                                "stream": require.resolve("stream-browserify")
-                            }
-                        }
+    return src('./scss/**/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
 
-                    }
-                )
-            )
-            .pipe(dest('dist'))
-    )
+        .pipe(concat('formio-external.css'))
+        .pipe(cleanCSS({ compatibility: 'ie8' }))
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('dist'));
 }
 
 function webServerTask() {
@@ -72,8 +39,16 @@ function webServerTask() {
             open: true,
         })
     );
+
+}
+
+// Watch task
+function watchTask() {
+    watch('./scss/**/*.scss', sassTask);
+    watch('./dist/**/*.js', jsTask);
+
 }
 
 exports.default = series(
-    parallel(jsTask, webServerTask)
+    parallel(jsTask, sassTask, watchTask, webServerTask)
 )

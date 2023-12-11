@@ -1,0 +1,22 @@
+.govuk-form-group.ef-confirmation{
+
+}
+
+.efPageHeading.formio-component-content{
+    & > .formio-component-htmlelement{
+        display: flex;
+        align-items: center;
+        & > h2{
+            order:2;
+            font-size: $font-size-xl;
+        }
+
+        & > .page-headingSuccess{
+            height: 60px;
+            margin-right: 17px;
+            & img{
+                max-width:60px;
+            }
+        }
+    }
+}

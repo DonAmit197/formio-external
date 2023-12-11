@@ -1,2 +1,10 @@
-@import './_formio-bootstrap.scss';
+//@import './_formio-bootstrap.scss';
+@import './variables';
+@import './font-face';
+@import './formio-template';
+@import './formio-gds';
+@import './formio-template';
+@import './rfl-template';
+@import './rfl-custom';
 @import './formWrapper';
+@import './_form-submission';

@@ -1,5 +1,58 @@
-.form-wrapper{
-max-width:1100px;
-margin-left:auto;
-margin-right:auto;
+.form-wrapper, .govuk-form-group.ef-confirmation  {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ExpressFormMainWrapper {
+    & h1 , & h2, & h3 {
+        color: $base-text-color !important;
+        font-weight: $font-weight-600  !important;
+    }
+    
+}
+
+.expressForm-confirm {
+    & h1, & h2, & h3 {
+        color: $base-text-color !important;
+        font-weight: $font-weight-600  !important;
+    }
+    
+}
+
+.expressform-section_header h2, .expressform-section_header h3 {
+    font-size: 2.25rem;
+    font-family: ExpressForm Sans,sans-serif !important;
+}
+.form-wrapper div, .form-wrapper p, .form-wrapper a, .form-wrapper a:link, .form-wrapper a:visited{
+    font-size: $base-font-size ;
+    line-height: calc(1.1875rem * 1.6);
+}
+
+.govuk-input.form-control, .form-control{
+    font-size: $font-16 !important;
+}
+
+.choices__list--single .choices__item{
+    font-size: $font-16 !important;
+}
+
+@media screen and (min-width: 1250px){
+    .govuk-form-group.expressform-page_header {
+        min-width: unset;
+    }
+}
+
+
+@media screen and (min-width: 991px){
+    .govuk-form-group{
+        max-width: 100%; 
+   }
+    .govuk-form-group.form-group.has-feedback {
+         max-width: 640px; 
+    }
+}
+[hidden="true"]{
+    display:none;
+    visibility:hidden;
 }

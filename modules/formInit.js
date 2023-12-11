@@ -1,4 +1,6 @@
+import { getformAPIURL } from "./stagingUrls";
 import { createForm } from "./createForm";
+
 
 export const FormInit = () => {
 
@@ -15,7 +17,9 @@ export const FormInit = () => {
         redirect: 'follow'
     };
 
-    fetch(`${process.env.FORMIO_API_URL}/form/${formId}`, requestOptions)
+    let formUrl = getformAPIURL();
+
+    fetch(`${formUrl}/form/${formId}`, requestOptions)
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok')
