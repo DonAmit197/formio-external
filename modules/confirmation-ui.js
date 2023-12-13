@@ -3,7 +3,7 @@ export const confirmationUIInit = (form) => {
     form.everyComponent((component) => {
 
         if (_.includes(component.component.customClass, 'efPageHeading')) {
-            console.log(component)
+            //console.log(component)
             const compoElem = component.element;
             const imageWrapper = document.createElement('div');
             imageWrapper.classList.add('page-headingSuccess');
@@ -20,6 +20,30 @@ export const confirmationUIInit = (form) => {
 
 
             }
+        }
+    })
+}
+
+export const tipsUI = (form) => {
+    return form.everyComponent((component) => {
+        if (_.includes(component.component.customClass, 'tips-container')) {
+            console.log(component);
+            const compoElem = component.element;
+            const imageWrapper = document.createElement('div');
+            imageWrapper.classList.add('tip-icon-wrapper');
+            const tipIconImg = document.createElement('img');
+            tipIconImg.setAttribute('src', '../dist/images/tipicon.png');
+            tipIconImg.setAttribute('alt', 'Tip Icon')
+            tipIconImg.classList.add('icon-image');
+            imageWrapper.appendChild(tipIconImg);
+
+            if (compoElem) {
+                let _tipWrapperhtmlElem = compoElem.querySelector('.formio-component-htmlelement');
+                _tipWrapperhtmlElem.appendChild(imageWrapper);
+
+
+            }
+
         }
     })
 }

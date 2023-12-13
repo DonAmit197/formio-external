@@ -1,6 +1,6 @@
 //import gds from '@ukhomeoffice/formio-gds-template';
 import { formSubmitEvent, submissionConfirmation } from './form-submit-event';
-import { confirmationUIInit } from "./confirmation-ui";
+import { confirmationUIInit, tipsUI } from "./confirmation-ui";
 const _ = require('lodash');
 Formio.use(gds);
 export const createForm = (formioForm, result) => {
@@ -10,6 +10,7 @@ export const createForm = (formioForm, result) => {
         formSubmitEvent(form);
         submissionConfirmation(form);
         confirmationUIInit(form);
+        tipsUI(form);
 
     });
 }

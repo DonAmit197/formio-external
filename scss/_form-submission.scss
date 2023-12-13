@@ -1,22 +1,59 @@
-.govuk-form-group.ef-confirmation{
-
+.govuk-form-group.ef-confirmation {
+    padding-top: 40px;
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & p {
+        font-family: $font-family-default !important;
+    }
+    & p,
+    & span {
+        font-size: $font-16 !important;
+    }
+    & .formio-component-htmlelement {
+        & h3 {
+            font-size: $font-size-ml;
+        }
+    }
 }
 
-.efPageHeading.formio-component-content{
-    & > .formio-component-htmlelement{
+.efPageHeading.formio-component-content {
+    & > .formio-component-htmlelement {
         display: flex;
         align-items: center;
-        & > h2{
-            order:2;
+        & > h2 {
+            order: 2;
             font-size: $font-size-xl;
+            font-weight: $font-weight-600;
+            margin: 0;
         }
 
-        & > .page-headingSuccess{
+        & > .page-headingSuccess {
             height: 60px;
             margin-right: 17px;
-            & img{
-                max-width:60px;
+            & img {
+                max-width: 60px;
             }
+        }
+    }
+}
+
+.govuk-form-group.formio-component.formio-component-content.tips-container {
+    & > .formio-component-htmlelement {
+        display: flex;
+        align-items: center;
+        border: 2px solid #0097e1;
+        max-width: 800px;
+        padding: 14px;
+
+        & > p {
+            margin: 0;
+            order: 2;
+        }
+
+        & > .tip-icon-wrapper {
+            margin-right: 16px;
         }
     }
 }
