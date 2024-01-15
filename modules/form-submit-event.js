@@ -1,4 +1,6 @@
 const axios = require('axios');
+import { footerElem } from './footer';
+console.log('FooterElem inside form-submit-js', footerElem);
 export const formSubmitEvent = (form) => {
   //form.nosubmit = true;
   //console.log(axios)
@@ -46,13 +48,15 @@ export const submissionConfirmation = (form) => {
     try {
       form.everyComponent((component) => {
         if (component.component.key === 'thankYouDetails') {
-          console.log('thank you', component);
+          //console.log('thank you', component);
           const compoElem = component.element;
           if (compoElem) {
             if (compoElem.parentNode) {
               compoElem.parentNode.removeChild(compoElem);
               document.body.appendChild(compoElem);
               document.querySelector('.ExpressFormMainWrapper').setAttribute('hidden', true);
+              compoElem.insertAdjacentElement('afterend', footerElem);
+              footerElem.classList.add('fixed-footer');
             }
             compoElem.classList.remove('ef-hideComponent');
             compoElem.classList.add('ef-showComponent');
