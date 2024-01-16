@@ -3,7 +3,7 @@ export default function nzbnNumber(form) {
     if (component.component.key === 'data_entity_nzbn1') {
       console.log('NZBN', component);
       form.ready.then(function () {
-        //const nzbnComp = component.component;
+        const nzbnComp = component.component;
         if (nzbnComp.data.url === 'data_nzbnentityurl') {
           nzbnComp.data.url = 'https://api.business.govt.nz/sandbox/nzbn/v5/entities';
         }
